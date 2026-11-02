@@ -442,3 +442,6 @@ a.brand:hover .logo { transform: rotate(4deg) scale(1.05); }
 .cards .receipt:nth-child(n+5) { animation-delay: 0.24s; }
 @keyframes pop-in { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .cards .receipt, .mascot { animation: none; } }
+/* Sample chats (AI Lodge showcase) */
+.samples { margin: 0 0 14px; }
+.samples .hint { margin: 0 0 8px; }
