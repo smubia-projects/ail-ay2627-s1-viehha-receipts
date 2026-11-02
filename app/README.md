@@ -4,7 +4,7 @@
 
 Group chats are where plans go to die. Someone says “I can probably do the frontend”, someone else suggests a different person, the chat moves on, and a week later everyone remembers a different version of what was decided. Ordinary AI summarisers make this worse: they read “I can probably do it” as a commitment and confidently report a decision that never happened.
 
-Receipts reads a group chat (a Telegram group it lives in, or a pasted / exported WhatsApp or Telegram chat) and sorts every plan into **confirmed**, **not confirmed yet**, **disputed** or **cancelled**. Every item links to the exact messages behind it, unsettled items come with a ready-to-send follow-up message, and money splits are worked out down to who pays whom.
+Receipts reads a group chat (a pasted or exported WhatsApp or Telegram chat) and sorts every plan into **confirmed**, **not confirmed yet**, **disputed** or **cancelled**. Every item links to the exact messages behind it, unsettled items come with a ready-to-send follow-up message, and money splits are worked out down to who pays whom.
 
 Built for the AI Lodge Hackathon 2026.
 
@@ -35,33 +35,43 @@ Built for the AI Lodge Hackathon 2026.
 
 `npm test` runs 21 offline tests of the parsers, guardrails, money engine and the full pipeline with a fake model.
 
-## Architecture
+## Architecture (AI Lodge showcase)
 
 ```
-Telegram group ──► grammY bot ──► JSON store ─┐
-                                              ├─► analyze.js
-Dashboard (paste / upload / samples) ─────────┘      1. redact personal data
-                                                     2. flag injection attempts
-                                                     3. Gemini (structured JSON output)
-                                                     4. verify ids, quotes, two-person rule
-                                                     5. money maths in code
-                                              ◄──── results + safety report
+Static frontend (Vercel, app/public)            Receipts API (Cloud Run, app/src)
+  paste / upload / sample chat  ──POST /api/analyze──►  analyze.js
+  parsed in the browser                                    1. redact personal data
+                                                           2. flag injection attempts
+                                                           3. model via an OpenAI-compatible gateway (JSON mode)
+                                                           4. verify ids, quotes, two-person rule
+                                                           5. money maths in code
+  receipts + click-to-evidence  ◄──── results + safety report (nothing stored)
 ```
 
-Node.js + Express, vanilla JS front end (no build step), Google Gemini via REST with a JSON response schema, grammY for Telegram.
+Node.js + Express API (stateless, API-only), vanilla JS front end (`build.js` writes `config.js` with the API URL
+and copies the shared chat parser and the sample chats into `public/`). Inference: `API_BASE_URL` (default apiyi),
+`API_KEY`, `MODEL_NAME` (default `gemini-3.5-flash-lite`). `/api/analyze` goes through the AI Lodge shared rate
+limiter (`src/rateLimitEngine.js`, bucket `analyze`): past the limit the app shows the AI Lodge card, and a paused
+demo shows a notice.
+
+Left out of the showcase, as they need stored chat data: the grammY Telegram bot, the JSON message store, share links
+and the feedback log. The original code is in the git history (before the commit `refactor(server): make the API stateless and API-only`).
 
 ## Run it locally
 
 ```bash
+cd app
 npm install
-cp .env.example .env      # then paste your GEMINI_API_KEY (and optionally TELEGRAM_BOT_TOKEN)
-npm start                 # http://localhost:3000
+cp .env.example .env      # then set API_KEY (or LLM_MOCK_FILE for UI work without a key)
+npm run dev               # API on http://localhost:8080
+npm run build             # writes public/config.js (API at http://localhost:8080)
+npx serve public          # frontend; open /home.html or /index.html
 ```
 
-See **SETUP.md** for the full guide, including the Telegram bot and deployment.
+`npm test` runs the unit tests (parser, money maths, safety checks, the analysis pipeline with a fake model, and the
+inference client against a stubbed gateway).
 
 ## Limitations
 
-- The bot only sees messages sent after it joined a group, and it needs privacy mode off (or admin rights) to read them.
 - Status judgements are AI-assisted and can be wrong. Receipts shows the evidence so people can check; it never decides who is right.
-- The JSON store is for demos. Hosts with ephemeral disks lose saved messages on redeploy.
+- The showcase stores nothing: results disappear when the page is closed.
