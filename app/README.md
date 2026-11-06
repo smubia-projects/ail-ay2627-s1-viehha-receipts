@@ -50,7 +50,7 @@ Static frontend (Vercel, app/public)            Receipts API (Cloud Run, app/src
 
 Node.js + Express API (stateless, API-only), vanilla JS front end (`build.js` writes `config.js` with the API URL
 and copies the shared chat parser and the sample chats into `public/`). Inference: `API_BASE_URL` (default apiyi),
-`API_KEY`, `MODEL_NAME` (default `gemini-3.5-flash-lite`). `/api/analyze` goes through the AI Lodge shared rate
+`API_KEY`, `MODEL_NAME` (default `deepseek-v4-flash`). `/api/analyze` goes through the AI Lodge shared rate
 limiter (`src/rateLimitEngine.js`, bucket `analyze`): past the limit the app shows the AI Lodge card, and a paused
 demo shows a notice.
 
