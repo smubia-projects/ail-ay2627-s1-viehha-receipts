@@ -94,6 +94,8 @@ export async function callModel({ system, user, schema, timeoutMs = 90_000 }) {
     ],
   };
   if (schema) body.response_format = { type: 'json_object' };
+  // DeepSeek thinks at length by default; an analysis makes several calls, so ask it to answer directly.
+  if (/deepseek/i.test(body.model)) body.reasoning_effort = 'none';
   const data = await post(body, timeoutMs);
   const text = data?.choices?.[0]?.message?.content;
   if (!text) throw new ModelError(`The AI returned no answer (${data?.choices?.[0]?.finish_reason || 'unknown reason'}).`, 502);
