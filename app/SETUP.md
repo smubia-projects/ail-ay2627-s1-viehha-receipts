@@ -1,3 +1,5 @@
+> **AI Lodge showcase fork:** this guide describes the original setup (Telegram bot, Render). The deployed demo is described in README.md ("Architecture").
+
 # Setup guide
 
 Total time: about 45 minutes for everything below. You need Node.js 18 or newer (`node -v` to check; install the LTS from nodejs.org if needed).
