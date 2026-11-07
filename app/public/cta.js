@@ -7,7 +7,7 @@ const PROJECT_CTA = {
   accentColor: '#7c5cff',
   headline: 'Receipts found!',
   description:
-    'This demo checked {count} group chats for you, sorting what was really agreed from what was not. Want to build AI tools that keep groups honest? Join us and build projects like this.',
+    'Want to build AI that settles who actually agreed to what in a group chat? Build with a team at AI Lodge and see your own project land on the showcase page.',
   programme: 'AI Lodge',
   programmeLink: 'https://www.smubia.com/ailodge',
   showcaseLink: 'https://www.smubia.com/Projects',
