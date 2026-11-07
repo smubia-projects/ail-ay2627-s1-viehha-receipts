@@ -24,28 +24,6 @@
     </header>
 
     <main class="wrap">
-      <section class="shared-banner hidden" id="sharedBanner" aria-label="Shared receipts">
-        <div class="lock-icon" aria-hidden="true"><i data-icon="clip"></i></div>
-        <div>
-          <h2 id="sharedTitle">Shared receipts</h2>
-          <p class="hint" id="sharedMeta">Loading…</p>
-        </div>
-        <a class="btn primary" href="/app">Make your own</a>
-      </section>
-
-      <section class="lock hidden" id="lock" aria-label="Access code">
-        <div class="lock-icon" aria-hidden="true"><i data-icon="lock"></i></div>
-        <div class="lock-text">
-          <h2>Enter the access code</h2>
-          <p class="hint">This demo is protected so nobody uses up the AI credit. Judges: the code is in the Devpost write-up.</p>
-        </div>
-        <form class="lock-form" id="lockForm">
-          <input type="password" id="lockInput" placeholder="Access code" autocomplete="off" required />
-          <button class="btn primary" type="submit">Unlock</button>
-        </form>
-        <p class="error hidden" id="lockError" role="alert"></p>
-      </section>
-
       <!-- ================= SETUP: three clear steps ================= -->
       <section class="setup" aria-label="Set up">
         <!-- STEP 1 -->
@@ -58,10 +36,14 @@
             </div>
           </div>
 
+          <div class="samples">
+            <p class="hint">No chat handy? Try a sample:</p>
+            <div class="chips" id="sampleRow"></div>
+          </div>
+
           <div class="tabs" role="tablist">
             <button class="tab active" data-tab="upload" role="tab"><i data-icon="upload"></i> Upload</button>
             <button class="tab" data-tab="paste" role="tab"><i data-icon="clipboard"></i> Paste</button>
-            <button class="tab hidden" data-tab="group" role="tab" id="groupTab"><i data-icon="users"></i> Group</button>
           </div>
 
           <div class="pane hidden" data-pane="paste">
@@ -86,10 +68,6 @@
             </details>
           </div>
 
-          <div class="pane hidden" data-pane="group">
-            <p id="groupInfo" class="hint"></p>
-            <button class="btn" id="reloadGroup">Refresh messages</button>
-          </div>
         </div>
 
         <!-- STEP 2 -->
@@ -156,6 +134,7 @@
       Receipts is an AI tool and can be wrong. It never decides who's right; it shows the evidence so your group can. Pasted chats are not stored.
     </footer>
 
+    <script src="/config.js"></script>
     <script type="module" src="/app.js"></script>
   </body>
 </html>
