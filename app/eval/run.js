@@ -1,5 +1,5 @@
 // Runs the labelled test chats through the real pipeline and reports accuracy.
-// Usage: npm run eval            (needs GEMINI_API_KEY in .env)
+// Usage: npm run eval            (needs API_KEY in .env)
 // Writes eval/RESULTS.md, which you can paste into your Devpost write-up.
 import 'dotenv/config';
 import fs from 'node:fs';
@@ -72,7 +72,7 @@ const pct = total ? Math.round((pass / total) * 100) : 0;
 const md = [
   `# Receipts evaluation`,
   '',
-  `Model: \`${process.env.GEMINI_MODEL || 'gemini-flash-latest'}\` · Run: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
+  `Model: \`${process.env.MODEL_NAME || process.env.OPENAI_MODEL || 'deepseek-v4-flash'}\` · Run: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
   '',
   `**${pass} / ${total} checks passed (${pct}%)** across ${cases.length} labelled chats.`,
   '',
