@@ -1,0 +1,16 @@
+# Only package*.json and src/ are needed for the API image.
+node_modules
+public
+samples
+eval
+test
+data
+.env
+.env.*
+!.env.example
+*.md
+build.js
+vercel.json
+Dockerfile
+.dockerignore
+.vercel
