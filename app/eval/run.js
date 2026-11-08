@@ -72,7 +72,7 @@ const pct = total ? Math.round((pass / total) * 100) : 0;
 const md = [
   `# Receipts evaluation`,
   '',
-  `Model: \`${process.env.MODEL_NAME || process.env.OPENAI_MODEL || 'deepseek-v4-flash'}\` · Run: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
+  `Model: \`${process.env.MODEL_NAME || process.env.OPENAI_MODEL || 'deepseek-v4-1-flash-260910'}\` · Run: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
   '',
   `**${pass} / ${total} checks passed (${pct}%)** across ${cases.length} labelled chats.`,
   '',

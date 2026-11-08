@@ -5,7 +5,7 @@ import fs from 'node:fs';
 // OPENAI_API_KEY / OPENAI_MODEL names are still read as fallbacks.
 
 const DEFAULT_BASE_URL = 'https://api.apiyi.com/v1';
-const DEFAULT_MODEL = 'deepseek-v4-flash';
+const DEFAULT_MODEL = 'deepseek-v4-1-flash-260910';
 
 const apiKey = () => (process.env.API_KEY || process.env.OPENAI_API_KEY || '').trim();
 const baseUrl = () => (process.env.API_BASE_URL || process.env.OPENAI_BASE_URL || DEFAULT_BASE_URL).trim().replace(/\/+$/, '');
