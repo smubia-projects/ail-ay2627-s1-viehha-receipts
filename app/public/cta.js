@@ -10,7 +10,7 @@ const PROJECT_CTA = {
     'Want to build AI that settles who actually agreed to what in a group chat? Build with a team at AI Lodge and see your own project land on the showcase page.',
   programme: 'AI Lodge',
   programmeLink: 'https://www.smubia.com/ailodge',
-  showcaseLink: 'https://www.smubia.com/Projects',
+  showcaseLink: 'https://www.smubia.com/projects',
   githubLink: 'https://github.com/smubia-projects/ail-ay2627-s1-viehha-receipts',
 };
 
